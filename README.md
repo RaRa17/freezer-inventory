@@ -17,32 +17,36 @@ Purpose is to give an overview of what is available in the freezer.
 
 ## Technologies used
 
+- `Intellij IDEA`
 - Spring Boot
 - Flyway database migration
 - Swagger documentation and access to Backend endpoints
+- Still to be added:
+  - `ThymeLeaf` Server side created webpage for easier user interaction
 
-- `ThymeLeaf` Server side created webpage for easier user interaction
-
-based on [[REF Build Your Own News Reader From Scratch with Spring Boot]]
+Based on [Build Your Own News Reader From Scratch with Spring Boot](https://www.youtube.com/watch?v=T6czePZZ0Vo)
+by [Wazoo Web Bytes](https://www.youtube.com/@wazoowebbytes). THANKS A LOT for this tutorial!
 
 ## Project Setup
 
-Use [Spring Initializr](https://start.spring.io/index.html) to create sceleton
+see `/documentation/ProjectSetup.md`
 
-- Maven
-- Java
-- Spring Boot 4.0.1
-- Artefact: flyway-demo
-- JAR
-- Java 17
-- Dependencies
-    - Spring Boot DevTools
-    - Lombok
-    - Docker Compose Support
-    - Spring Web
-    - Spring Data JPA
-    - H2 Database
-    - MariaDB Driver
-    - Flyway Migration
-    - Validation
-    - Thymeleaf
+## How to use the application
+
+see `/documentation/HowToUse.md`
+
+## Key learnings
+
+Start building the documentation and the application in parallel. E.g., document `ProjectSetup` along with doing it.
+
+Writing Swagger documentation helps to analyze possible error cases and fault reactions.
+
+File-based H2 (with its `h2-console`) is fast and quite handy for development.
+
+## Still to improve
+
+- Use `ThymeLeaf` for server generated homepage / front-end
+- Create multiple profiles to use with local-H2, local-MySql or Network-MySql
+- Implement build to docker
+
+***

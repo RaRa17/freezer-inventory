@@ -47,6 +47,7 @@ public class FrozenItemController {
 
   //** --------------------------------------------------------------------
   //**
+  @Operation(summary = "Number of items in the freezer")
   @GetMapping("/count")
   public long countAllFrozenItems() {
     return frozenItemService.getAll().size();
@@ -112,19 +113,35 @@ public class FrozenItemController {
           "}")
       ),
       }),
-    @ApiResponse(responseCode = "404", description = "Failure during create",
+    @ApiResponse(responseCode = "406", description = "Not acceptable (request data not correct)",
       content = @Content),
     @ApiResponse(responseCode = "409", description = "Id given in request body but already existing in database",
       content = @Content)
   })
   @PostMapping("")
-  public FrozenItem saveFrozenItem(@RequestBody FrozenItem frozenItem) {
+  public FrozenItem createFrozenItem(@io.swagger.v3.oas.annotations.parameters.RequestBody(
+    description = "Frozen item to create",
+    required = true,
+    content = @Content(
+      mediaType = "application/json",
+      schema = @Schema(implementation = FrozenItem.class),
+      examples = {
+        @ExampleObject(value = "{" +
+          "\"id\": null, " +
+          "\"name\": \"Gulaschsuppe\", " +
+          "\"quantity\": 2, " +
+          "\"frozenAt\": \"2025-12-29\" " +
+          "}", name = "Full Content")
+      }
+    ))
+                                       @RequestBody FrozenItem frozenItem) {
     if (frozenItem.getId() != null) {
-      Optional<FrozenItem> existingFrozenItem = frozenItemRepository.findById(frozenItem.getId());
+      Optional<FrozenItem> existingFrozenItem = frozenItemService.getById(frozenItem.getId());
       if (existingFrozenItem.isPresent()) {
         throw new ResponseStatusException(HttpStatus.CONFLICT, "Frozen item with id " + frozenItem.getId() + " already exists");
       }
     }
+    frozenItem.setId(null);
     return frozenItemService.save(frozenItem);
   }
 
