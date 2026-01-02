@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @Data
 public class FrozenItem {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  //@GeneratedValue(strategy = GenerationType.SEQUENCE)    // used for PostgreSQL
+  @GeneratedValue(strategy = GenerationType.IDENTITY)    // used for MySQL
   Long id;
 
   String name;

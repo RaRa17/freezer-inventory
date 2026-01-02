@@ -47,4 +47,21 @@ Create repository, service and controller (`src/main/java/com/freezer/inventory`
 
 Check possible error scenario of `FrozenItemController` and annotate it for documentation in `swagger UI`
 
+## Setup for multiple data sources
+
+To ease and speed up the development, support for following data sources are added with respectie profiles:
+
+- `local_h2`: File-base H2
+- `net_mysql`: MySql server on the local network
+- `net_postgres`: PostgreSQL server on the local network
+
+The `application.properties` file was split and kept only global settings.
+
+> [!Warning]
+> The MySql database does not support SEQUENCE. 
+> Therefore the `GenerationType` for primary key in the spring boot entity must be adapted.
+> Also database migration scripts must be adapted.
+> 
+> So, practically a switch between MySql and PostgreSQL is hard to implement.
+
 ***
