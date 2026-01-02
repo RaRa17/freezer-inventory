@@ -19,6 +19,9 @@ Purpose is to give an overview of what is available in the freezer.
 
 - `Intellij IDEA`
 - Spring Boot
+- H2 database
+- MySQL database
+- PostgreSql database
 - Flyway database migration
 - Swagger documentation and access to Backend endpoints
 - Still to be added:
