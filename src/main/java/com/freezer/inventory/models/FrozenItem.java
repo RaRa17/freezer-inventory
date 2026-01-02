@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 public class FrozenItem {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
 
   String name;
