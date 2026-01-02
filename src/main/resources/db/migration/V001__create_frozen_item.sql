@@ -1,8 +1,19 @@
 CREATE TABLE IF NOT EXISTS frozen_item
 (
-  id BIGINT NOT NULL AUTO_INCREMENT,
+  -- id BIGINT NOT NULL AUTO_INCREMENT,       -- Used for PostgreSQL
+  id BIGINT NOT NULL AUTO_INCREMENT,       -- Used for MySQL
   name VARCHAR(255) NOT NULL,
   quantity INT,
   frozen_at DATE,
   PRIMARY KEY (id)
 );
+
+-- Sequence for PostgreSQL
+/*
+CREATE SEQUENCE IF NOT EXISTS frozen_item_seq;
+  START WITH 1
+  INCREMENT BY 50
+  MINVALUE 0
+  MAXVALUE 999999999
+  CYCLE;
+ */
