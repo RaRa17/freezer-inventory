@@ -48,8 +48,8 @@ File-based H2 (with its `h2-console`) is fast and quite handy for development.
 
 ## Still to improve
 
-- Use `ThymeLeaf` for server generated homepage / front-end
-- Create multiple profiles to use with local-H2, local-MySql or Network-MySql
+- Use `ThymeLeaf` for server generated homepage / front-end 
 - Implement build to docker
+- ~~Create multiple profiles to use with local-H2, local-MySql or Network-MySql~~ - DONE
 
 ***
