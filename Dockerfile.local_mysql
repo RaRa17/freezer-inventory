@@ -1,0 +1,5 @@
+FROM openjdk:27-ea-slim
+WORKDIR /app
+COPY ./target/*.jar /app/freezer.jar
+EXPOSE 8090
+ENTRYPOINT ["java", "-jar", "freezer.jar", "--spring.profiles.active=local_mysql"]

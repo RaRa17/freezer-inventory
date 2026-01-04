@@ -1,8 +1,34 @@
 # How to use the application
 
+## Prerequisites
+
+To ease the use of the application a docker image is available on docker hub.
+The tag `local_h2` persists the data in a local file-base H2 database.
+
+see also [on my docker hub - rara69](https://hub.docker.com/repository/docker/rara69/freezer-inventory/general)
+
+```bash
+docker pull rara69/freezer-inventory:local_h2.0.0.1
+```
+
+## Usage
+
 Since currently no "front-end" is available, the application can only be used via the [`swagger UI`](http://localhost:8080/swagger-ui.html).
 
-## Frozen Items
+### Version
+
+Endpoint `/api/version` returns a JSON object with current version and active spring profile of the application.
+
+```json
+{
+  "version": "0.0.1",
+  "profile": "local_h2"
+}
+```
+
+Response code will always be 200 (ok).
+
+### Frozen Items
 
 This represents a package that has been frozen.
 

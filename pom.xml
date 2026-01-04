@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.freezer</groupId>
 	<artifactId>inventory</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>inventory</name>
 	<description>Manage whats in your freezer</description>
 	<url/>
@@ -29,7 +29,33 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-	<dependencies>
+
+    <!-- !*! Define MAVEN profiles and set SPRING_PROFILE accordingly -->
+    <profiles>
+        <profile>
+            <id>local_h2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <SPRING_PROFILE>local_h2</SPRING_PROFILE>
+            </properties>
+        </profile>
+        <profile>
+            <id>net_mysql</id>
+            <properties>
+                <SPRING_PROFILE>net_mysql</SPRING_PROFILE>
+            </properties>
+        </profile>
+        <profile>
+            <id>net_postgres</id>
+            <properties>
+                <SPRING_PROFILE>net_postgres</SPRING_PROFILE>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-h2console</artifactId>
@@ -127,18 +153,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
