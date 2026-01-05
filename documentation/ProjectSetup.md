@@ -64,4 +64,16 @@ The `application.properties` file was split and kept only global settings.
 > 
 > So, practically a switch between MySql and PostgreSQL is hard to implement.
 
+### Using existing database
+
+In case you want to use an existing database, setup the connection properties via environment variables. (e.g., in a .env.net_mysql file)
+
+```dotenv
+MYSQL_HOST=<ip-or-dns-name-of-mysql-server>
+MYSQL_PORT=<port-of-mysql-server>
+MYSQL_DB=<database-name>
+MYSQL_USER=<database-user>
+MYSQL_PASSWORD=<database-password>
+```
+
 ***

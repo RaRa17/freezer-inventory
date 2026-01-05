@@ -43,6 +43,41 @@ EXPOSE <exposed-port>
 CMD ["java", "-jar", "<app-name>.jar", "--spring.profiles.active=local_h2"]
 ```
 
+## Provide database credentials
+
+To configure the database access, the required credentials must be provided as environment variables.
+
+The `application-<profile>.properties` imports a file `.env.<profile>` which contains the required settings and build the spring boot attribute based on that.
+
+```dotenv
+spring.config.import=optional:file:.env.net_mysql[.properties]
+
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}
+spring.datasource.username = ${MYSQL_USER}
+spring.datasource.password  = ${MYSQL_PASSWORD}
+```
+
+Create a `.env` file at the project root folder and add content like the following example.
+
+```dotenv
+# Secrets specific to profile `local_mysql`
+
+## Database credentials
+MYSQL_HOST=<ip-address-of-mysql-server>
+MYSQL_PORT=<port-of-mysql-server>
+MYSQL_DB=<database-name>
+MYSQL_USER=<database-user>
+MYSQL_PASSWORD=<database-password>
+```
+
+```dotenv
+# Secrets specific to profile `local_h2`
+
+## Database credentials
+H2_USER=admin
+H2_PASSWORD=mypassword
+```
+
 ## Build and deploy
 
 Build java archive

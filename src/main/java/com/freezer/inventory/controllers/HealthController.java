@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.freezer.inventory.models.FrozenItem;
-
-
 @RestController
 @Tag(name = "Health and version", description = "Information about the health, variant and version of the application")
 @RequestMapping("/api/health")
@@ -26,6 +23,9 @@ public class HealthController {
 
   @Value("${spring.profiles.active}")
   private String profile;
+
+  @Value("${com.freezer.inventory.test-secret}")
+  private String testSecret;
 
   //** --------------------------------------------------------------------
   //**
@@ -47,5 +47,12 @@ public class HealthController {
   @GetMapping("/version")
   public VersionData version() {
     return new VersionData(version, profile);
+  }
+
+  //** --------------------------------------------------------------------
+  //**
+  @GetMapping("/testsecret")
+  public ResponseEntity<String> testSecret() {
+    return ResponseEntity.ok(testSecret);
   }
 }
