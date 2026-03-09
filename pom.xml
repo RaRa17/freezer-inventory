@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.freezer</groupId>
-	<artifactId>inventory</artifactId>
-	<version>0.0.1</version>
+	<artifactId>freezer-inventory-be</artifactId>
+	<version>0.0.2</version>
 	<name>inventory</name>
 	<description>Manage whats in your freezer</description>
 	<url/>
