@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.freezer</groupId>
 	<artifactId>freezer-inventory-be</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.2a</version>
 	<name>inventory</name>
 	<description>Manage whats in your freezer</description>
 	<url/>
