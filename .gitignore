@@ -1,4 +1,6 @@
 .env
+.env.net*
+
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
