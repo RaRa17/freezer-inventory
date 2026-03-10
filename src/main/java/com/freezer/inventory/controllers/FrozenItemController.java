@@ -1,6 +1,7 @@
 package com.freezer.inventory.controllers;
 
 import com.freezer.inventory.models.FrozenItem;
+import com.freezer.inventory.models.FrozenItemDto;
 import com.freezer.inventory.repositories.FrozenItemRepository;
 import com.freezer.inventory.services.FrozenItemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,8 +28,8 @@ public class FrozenItemController {
 
   @Autowired
   FrozenItemService frozenItemService;
-  @Autowired
-  private FrozenItemRepository frozenItemRepository;
+  //@Autowired
+  //private FrozenItemRepository frozenItemRepository;
 
   //** --------------------------------------------------------------------
   //**
@@ -61,12 +61,7 @@ public class FrozenItemController {
       responseCode = "200",
       description = "Item found",
       content = { @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{" +
-          "\"id\": 99, " +
-          "\"name\": \"Gulaschsuppe\", " +
-          "\"quantity\": 2, " +
-          "\"frozenAt\": \"2025-12-29\" " +
-          "}"),
+        examples = @ExampleObject(value = exampleFrozenItem),
         schema = @Schema(implementation = FrozenItem.class)) }),
     @ApiResponse(responseCode = "404", description = "Topic with this ID not found",
       content = @Content)
@@ -105,12 +100,7 @@ public class FrozenItemController {
       content = { @Content(
         mediaType = "application/json",
         schema = @Schema(implementation = FrozenItem.class),
-        examples = @ExampleObject(value = "{" +
-          "\"id\": 99, " +
-          "\"name\": \"Gulaschsuppe\", " +
-          "\"quantity\": 2, " +
-          "\"frozenAt\": \"2025-12-29\" " +
-          "}")
+        examples = @ExampleObject(value = exampleFrozenItem)
       ),
       }),
     @ApiResponse(responseCode = "406", description = "Not acceptable (request data not correct)",
@@ -124,14 +114,9 @@ public class FrozenItemController {
     required = true,
     content = @Content(
       mediaType = "application/json",
-      schema = @Schema(implementation = FrozenItem.class),
+      schema = @Schema(implementation = FrozenItemDto.class),
       examples = {
-        @ExampleObject(value = "{" +
-          "\"id\": null, " +
-          "\"name\": \"Gulaschsuppe\", " +
-          "\"quantity\": 2, " +
-          "\"frozenAt\": \"2025-12-29\" " +
-          "}", name = "Full Content")
+        @ExampleObject(value = exampleFrozenItemDto, name = "Full Content")
       }
     ))
                                        @RequestBody FrozenItem frozenItem) {
@@ -144,5 +129,66 @@ public class FrozenItemController {
     frozenItem.setId(null);
     return frozenItemService.save(frozenItem);
   }
+
+  //** --------------------------------------------------------------------
+  //**
+  @PutMapping("/{id}")
+  @Operation( summary = "Update a frozen item" )
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Frozen item updated successfully",
+      content = { @Content(mediaType = "application/json",
+        schema = @Schema(implementation = FrozenItem.class),
+        examples = @ExampleObject(value = exampleFrozenItem)
+      )}
+    ),
+    @ApiResponse(responseCode = "404", description = "Frozen item with this ID not Found", content = @Content)
+  })
+  public FrozenItem updateFrozenItem(
+    @PathVariable("id") Long id,
+    @Parameter(
+      description = "Id of the item to update",
+      required = true
+    )
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Frozen item to update",
+      required = true,
+      content = @Content(
+        mediaType = "application/json",
+        schema = @Schema(implementation = FrozenItem.class),
+        examples = {
+          @ExampleObject(value = exampleFrozenItem, name = "New frozen item information")
+        }
+      )
+    )
+    @RequestBody FrozenItem frozenItem
+  ) {
+    if (id == null) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id must not be null");
+    }
+    if (frozenItem.getId() == null) {
+      frozenItem.setId(id);
+    }
+    if (!frozenItem.getId().equals(id)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id in request body must match id in path");
+    }
+    return frozenItemService.save(frozenItem);
+  }
+
+  //** --------------------------------------------------------------------
+  //**
+  static final String exampleFrozenItem = "{" +
+    "\"id\": 99, " +
+    "\"name\": \"Gulaschsuppe\", " +
+    "\"quantity\": 2, " +
+    "\"frozenAt\": \"2025-12-29\" " +
+    "}";
+
+  static final String exampleFrozenItemDto = "{" +
+    "\"id\": null, " +
+    "\"name\": \"Gulaschsuppe\", " +
+    "\"quantity\": 2 " +
+    "}";
 
 }

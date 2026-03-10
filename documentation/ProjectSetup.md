@@ -66,7 +66,7 @@ The `application.properties` file was split and kept only global settings.
 
 ### Using existing database
 
-In case you want to use an existing database, setup the connection properties via environment variables. (e.g., in a .env.net_mysql file)
+In case you want to use an existing database, setup the connection properties via environment variables when creating the docker container from the image. (e.g., in a .env.net_mysql file)
 
 ```dotenv
 MYSQL_HOST=<ip-or-dns-name-of-mysql-server>
