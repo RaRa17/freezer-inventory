@@ -19,13 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Health and version", description = "Information about the health, variant and version of the application")
 @RequestMapping("/api/health")
 public class HealthController {
-  @Value("V1.1.1")
+  //@Value("V1.1.1")
+  @Value("${com.freezer.inventory.version}")
   private String version;
 
   @Value("default-profile")
+  //@Value("${spring.profiles.active}")
   private String profile;
 
   @Value("not-so-secret")
+  //@Value("${com.freezer.inventory.test-secret}")
   private String testSecret;
 
   //** --------------------------------------------------------------------
