@@ -18,6 +18,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: PreCheck
+      run: ls -al data/*
     - name: Remove H2-database for build
       run: rm data/* -f
     - name: Check
