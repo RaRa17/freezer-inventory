@@ -23,8 +23,8 @@ public class HealthController {
   @Value("${com.freezer.inventory.version}")
   private String version;
 
-  @Value("default-profile")
-  //@Value("${spring.profiles.active}")
+  //@Value("default-profile")
+  @Value("${spring.profiles.active}")
   private String profile;
 
   @Value("not-so-secret")
