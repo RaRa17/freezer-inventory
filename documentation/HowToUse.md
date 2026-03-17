@@ -2,9 +2,9 @@
 
 ## Prerequisites
 
-To ease the use of the application a docker image is available on docker hub.
+To ease the use of the application, a docker image is available on docker hub.
 
-see also [on my docker hub - rara69](https://hub.docker.com/repository/docker/rara69/freezer-inventory-be/general)
+see also on [my docker hub - rara69](https://hub.docker.com/repository/docker/rara69/freezer-inventory-be/general)
 
 ### Using a local H2 Database
 
@@ -44,7 +44,7 @@ docker-compose up -d
 
 ### Using an existing MySQL Database
 
-In case you want to use an existing MySql database, setup the connection properties via environment variables when creating the docker container from the image. (e.g., in a .env.net_mysql file)
+In case you want to use an existing MySql database, set up the connection properties via environment variables when creating the docker container from the image. (e.g., in a .env.net_mysql file)
 
 ```dotenv
 MYSQL_HOST=<ip-or-dns-name-of-mysql-server>
@@ -109,13 +109,13 @@ All endpoints are prefixed with `/api/frozen-items"`.
   - request body: a JSON object with the following properties:
     - `id`: the id of the frozen item (should be null for new items)
     - `name`: the name of the frozen item
-    - `quantity`: how many item got frozen
+    - `quantity`: how many items got frozen
     - `frozenAt`: will be overwritten with the current date
   - if the id is given with a value already existing in the database, the request will fail
   - response code: 
     - 201 (created)
     - 406 (not acceptable): request body is not valid
-    - 409 (conflict): Id given in request body but already existing in database
+    - 409 (conflict): The id given in the request body but already existing in the database
   - response body: a JSON object with the frozen item as written into the database
 - GET /api/frozen-items/{id}: retrieves a specific frozen item by its id
   - Parameter: id of the frozen item
