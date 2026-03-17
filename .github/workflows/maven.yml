@@ -22,3 +22,5 @@ jobs:
       run: rm data/* -f
     - name: Check
       run: ls -al
+    - name: Check2
+      run: ls -al data/*
