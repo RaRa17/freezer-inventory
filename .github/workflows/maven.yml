@@ -24,5 +24,6 @@ jobs:
       run: rm data/* -f
     - name: Check
       run: ls -al
-    - name: Check2
-      run: ls -al data/*
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+      
