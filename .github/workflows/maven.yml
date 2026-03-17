@@ -20,6 +20,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Remove H2-database for build
       run: rm data/* -f
+    - name: Check
+      run: pwd
     - name: Set up JDK 22
       uses: actions/setup-java@v4
       with:
