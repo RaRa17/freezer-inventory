@@ -25,6 +25,6 @@ jobs:
     - name: Check
       run: ls -al
     - name: Build with Maven
-      run: mvn -B clean
+      run: mvn clean package
       # package --file pom.xml
       
