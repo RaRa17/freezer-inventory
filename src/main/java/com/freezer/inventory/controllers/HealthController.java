@@ -27,8 +27,8 @@ public class HealthController {
   @Value("${spring.profiles.active}")
   private String profile;
 
-  @Value("not-so-secret")
-  //@Value("${com.freezer.inventory.test-secret}")
+  //@Value("not-so-secret")
+  @Value("${com.freezer.inventory.test-secret}")
   private String testSecret;
 
   //** --------------------------------------------------------------------
