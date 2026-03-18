@@ -31,6 +31,8 @@ jobs:
         distribution: 'temurin'
         cache: maven      
     - name: Build with Maven
+      env: 
+        TEST_SECRET: 'github-action-step'
       run: mvn -B clean package
       # package --file pom.xml
       
