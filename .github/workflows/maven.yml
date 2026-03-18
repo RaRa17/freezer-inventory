@@ -20,7 +20,19 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+
       - name: Build with Maven
         env:
           TEST_SECRET: 'github-action-step'
         run: mvn -B clean package --file pom.xml
+        
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: Build & push Docker image
+        with:
+          image: rara69/freezer-inventory-be
+          tags: test
+          registry: docker.io
+          dockerfile: Dockerfile.local_h2
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
